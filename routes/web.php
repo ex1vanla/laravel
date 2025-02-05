@@ -19,4 +19,4 @@ Route::get('/', function () {
 });
 
 
-Route::get('tests/test', [TestController::class. 'index']);
+Route::get('tests/test', [TestController::class, 'index']);
