@@ -16,20 +16,23 @@ use App\Http\Controllers\ContactFormController;
 */
 
 Route::get('/', function () {
-    return redirect('tests/test'); // Chuyển hướng trang chủ về /tests/test
+    return view('welcome'); // Chuyển hướng trang chủ về /tests/test
 });
 // Route::get('/', [TestController::class, 'index']);
 Route::get('tests/test',[ TestController::class, 'index']);
 
-Route::prefix('contacts')->middleware('auth')
+Route::prefix('contacts')
+->middleware('auth')
 ->controller(ContactFormController::class)
-->name('contact.')->group(function(){
+->name('contacts.')
+->group(function(){
     Route::get('/','index')->name('index');
+    Route::get('/create','create')->name('create');
+    Route::post('/','store')->name('store');
+    Route::get('/{id}','show')->name('show');
+    Route::get('/{id}/edit','edit')->name('edit');
 });
-// Route::resource('contacts', ContactFormController::class);
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+
 
 Route::get('/dashboard', function () {
     return view('dashboard');
